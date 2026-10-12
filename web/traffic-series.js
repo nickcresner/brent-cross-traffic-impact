@@ -6,7 +6,7 @@
 })(typeof window === 'undefined' ? globalThis : window, function () {
   'use strict';
   const centre = [-0.2183801, 51.5767595];
-  const radiusMetres = 8046.72;
+  const radiusMetres = 11265.408;
   function distance(coordinates) {
     const rad = x => x * Math.PI / 180;
     const a = rad(coordinates[1] - centre[1]), b = rad(coordinates[0] - centre[0]);
@@ -25,7 +25,7 @@
       if (!p || typeof p.id !== 'string' || !p.id || ids.has(p.id) || typeof p.name !== 'string' || !p.name.trim()) throw new Error('Points need unique string IDs and names.');
       if (!Array.isArray(p.coordinates) || p.coordinates.length !== 2 || !p.coordinates.every(Number.isFinite)) throw new Error('Point coordinates must be [longitude, latitude].');
       const [lon, lat] = p.coordinates;
-      if (lon < -180 || lon > 180 || lat < -90 || lat > 90 || distance(p.coordinates) > radiusMetres) throw new Error('Point lies outside the five-mile study extent.');
+      if (lon < -180 || lon > 180 || lat < -90 || lat > 90 || distance(p.coordinates) > radiusMetres) throw new Error('Point lies outside the seven-mile study extent.');
       ids.add(p.id);
     }
     let previous = -Infinity;

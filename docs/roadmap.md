@@ -7,7 +7,7 @@
 - [x] Document study protocol, assumptions and data requirements.
 - [x] Add validated exploratory CSV-to-JSON analysis and automated tests.
 - [x] Add synthetic time playback, time slider, point details and local JSON import.
-- [x] Extend the animation basemap to a five-mile classified road network.
+- [x] Extend the animation basemap to a seven-mile classified road network.
 
 ## Milestone 1 — acquire usable observations
 

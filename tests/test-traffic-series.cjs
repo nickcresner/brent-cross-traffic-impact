@@ -29,6 +29,15 @@ test('invalid geometry and measurements fail validation', () => {
  const d = demo(); d.points[0].coordinates = [51.58, -.22]; assert.throws(() => api.validate(d), /extent/);
  const e = demo(); e.frames[0].values.a.reference_time_s = 0; assert.throws(() => api.validate(e), /positive/);
 });
+test('seven-mile boundary admits outer roads and rejects points beyond the study area', () => {
+ const point = { id: 'outer', name: 'Boundary check', coordinates: [api.centre[0], api.centre[1] + .0868] };
+ assert.ok(api.distance(point.coordinates) > 5 * 1609.344);
+ assert.ok(api.distance(point.coordinates) < 7 * 1609.344);
+ assert.doesNotThrow(() => api.createDemo([point]));
+ point.coordinates[1] = api.centre[1] + .103;
+ assert.ok(api.distance(point.coordinates) > 7 * 1609.344);
+ assert.throws(() => api.createDemo([point]), /seven-mile/);
+});
 test('unknown IDs and fabricated fractional sample counts fail validation', () => {
  const d = demo(); d.frames[0].values.other = d.frames[0].values.a; assert.throws(() => api.validate(d), /unknown/);
  const e = demo(); e.frames[0].values.a.sample_size = .3; assert.throws(() => api.validate(e), /sample/);

@@ -4,13 +4,13 @@ A geospatial portfolio project by **Nick Cresner** investigating how the A41 Bre
 
 **Research question:** How much additional journey time is associated with the works, where does it spread, and how does it change by time of day and construction phase?
 
-**Status: animated prototype and research foundation, 12 October 2026.** A five-mile road-network map has time playback, a time slider and selectable road points. Its initial values are explicitly simulated, not local traffic observations. The restriction map, reproducible exploratory analysis pipeline and study protocol are included. This project has no measured traffic-impact findings or live journey predictions yet.
+**Status: animated prototype and research foundation, 12 October 2026.** A seven-mile road-network map has time playback, a time slider and selectable road points. Its initial values are explicitly simulated, not local traffic observations. The restriction map, reproducible exploratory analysis pipeline and study protocol are included. This project has no measured traffic-impact findings or live journey predictions yet.
 
 ## Explore the map
 
 Open `web/index.html` in a browser. Play the illustrative day from 06:00–22:00 or move the time slider. Road points change size and category with travel time relative to a reference, and missing data remains visible. Load an eligible observation JSON file locally to replace the simulation; see [the time-series contract](docs/time-series.md).
 
-The animation covers a geodesic five-mile radius around Brent Cross using sourced OS Open Roads geometry. The boundary is a study extent, not evidence that the works affect every road inside it. `web/restrictions.html` retains the dated restriction map. No account, build step or traffic API key is needed; both maps run offline using vendored D3.
+The animation covers a geodesic seven-mile radius around Brent Cross using sourced OS Open Roads geometry. The boundary is a study extent, not evidence that the works affect every road inside it. `web/restrictions.html` retains the dated restriction map. No account, build step or traffic API key is needed; both maps run offline using vendored D3.
 
 The simulation's generic curves and distance lag demonstrate an interface, not a calibrated model of actual traffic propagation. Circle size represents travel-time slowdown, not vehicle volume. This is an independent project, not a TfL service.
 
@@ -37,6 +37,8 @@ Use the schema in [data/README.md](data/README.md). Do not substitute illustrati
 
 ## Research plan
 
+Start with the [step-by-step data-acquisition plan](docs/next-steps.md). The [seven-mile study boundary](data/study-area.geojson) is available as GeoJSON for provider requests.
+
 1. Obtain an eligible TomTom Traffic Stats historical extract and assess local sample coverage.
 2. Request TfL's works-phase traffic assessment, monitoring and traffic-management schedule.
 3. Compare matched term-time periods before and after restrictions, flagging confounding events.
@@ -51,7 +53,7 @@ See [methodology](docs/methodology.md), [data sources](docs/data-sources.md), [r
 ```text
 analysis/        Validated CSV-to-JSON exploratory estimator
 tests/           Behaviour and data-quality checks
-web/             Standalone restriction map
+web/             Animated seven-mile map and restriction map
 data/            Observation contract; raw and derived data ignored
 docs/            Research protocol, sources and delivery milestones
 ```
