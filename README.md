@@ -4,13 +4,15 @@ A geospatial portfolio project by **Nick Cresner** investigating how the A41 Bre
 
 **Research question:** How much additional journey time is associated with the works, where does it spread, and how does it change by time of day and construction phase?
 
-**Status: project foundation, 12 October 2026.** The restriction map works. A reproducible exploratory analysis pipeline and study protocol are included. Historical traffic observations, a validated attribution model and a live journey planner are not yet available. This project has no measured traffic-impact findings.
+**Status: animated prototype and research foundation, 12 October 2026.** A five-mile road-network map has time playback, a time slider and selectable road points. Its initial values are explicitly simulated, not local traffic observations. The restriction map, reproducible exploratory analysis pipeline and study protocol are included. This project has no measured traffic-impact findings or live journey predictions yet.
 
 ## Explore the map
 
-Open `web/index.html` in a browser. It includes sourced OpenStreetMap street geometry, three numbered restriction areas, dates and a legend. No account, build step or traffic API key is needed. It runs offline using a vendored D3 library.
+Open `web/index.html` in a browser. Play the illustrative day from 06:00–22:00 or move the time slider. Road points change size and category with travel time relative to a reference, and missing data remains visible. Load an eligible observation JSON file locally to replace the simulation; see [the time-series contract](docs/time-series.md).
 
-The map shows a dated restriction snapshot, not current traffic speeds or a forecast of two years of unchanged congestion. It is an independent project, not a TfL service.
+The animation covers a geodesic five-mile radius around Brent Cross using sourced OS Open Roads geometry. The boundary is a study extent, not evidence that the works affect every road inside it. `web/restrictions.html` retains the dated restriction map. No account, build step or traffic API key is needed; both maps run offline using vendored D3.
+
+The simulation's generic curves and distance lag demonstrate an interface, not a calibrated model of actual traffic propagation. Circle size represents travel-time slowdown, not vehicle volume. This is an independent project, not a TfL service.
 
 ## Run the analysis
 
@@ -18,6 +20,7 @@ Python 3.10+; no third-party packages required:
 
 ```bash
 python -m unittest discover -s tests -v
+node --test tests/test-traffic-series.cjs
 python analysis/estimate_impact.py --input path/to/observations.csv --output data/derived/impact.json --min-samples 5
 ```
 
@@ -58,5 +61,7 @@ docs/            Research protocol, sources and delivery milestones
 Restrictions: [TfL travel advice](https://tfl.gov.uk/brent-cross-flyover), verified 12 October 2026. Project duration and phases: [TfL renewal project](https://tfl.gov.uk/travel-information/improvements-and-projects/brent-cross-flyover-renewals).
 
 Street geometry © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), obtained via the OSM map API on 12 October 2026 and converted to GeoJSON. The supplied geometry is governed by ODbL; the original geometry export covers approximately longitude −0.235 to −0.214 and latitude 51.566 to 51.583, with complete intersecting ways extending beyond that area. Work-zone extents are indicative.
+
+The wide-area basemap uses OS Open Roads from a public ArcGIS mirror with stated data currency October 2019, retrieved 12 October 2026. Contains OS data © Crown copyright and database right 2019, used under the Open Government Licence. It provides generalised cartographic context, not current lane restrictions or turn-by-turn routing. Source and extraction details are in [data sources](docs/data-sources.md).
 
 Code is MIT licensed. Data retains its source licence. D3 7.9.0 is ISC licensed; its licence is included alongside the vendored library.

@@ -6,6 +6,8 @@
 - [x] Produce sourced, dated restriction map.
 - [x] Document study protocol, assumptions and data requirements.
 - [x] Add validated exploratory CSV-to-JSON analysis and automated tests.
+- [x] Add synthetic time playback, time slider, point details and local JSON import.
+- [x] Extend the animation basemap to a five-mile classified road network.
 
 ## Milestone 1 — acquire usable observations
 
@@ -13,6 +15,7 @@
 - [ ] Obtain a small historical sample with coverage information.
 - [ ] Request TfL's assessment, monitoring and works-phase register.
 - [ ] Map observations to a stable segment network.
+- [ ] Obtain a current complete road network and evaluate minor-road coverage.
 - [ ] Audit dates, time zones, preparatory works and missing coverage.
 
 Acceptance: reproducible, licensed input covering comparable periods and directions; missing data visible.
